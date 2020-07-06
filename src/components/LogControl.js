@@ -92,7 +92,7 @@ class LogControl extends React.Component {
   handleDeletingLog = (id) => {
     const { dispatch } = this.props;
     const action = {
-      type: 'DELETE_TICKET',
+      type: 'DELETE_LOG',
       id: id
     }
 
