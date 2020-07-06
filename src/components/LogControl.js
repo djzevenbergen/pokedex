@@ -4,6 +4,7 @@ import LogList from "./LogList";
 import LogDetail from "./LogDetail";
 import EditLogForm from './EditLogForm';
 import { connect } from 'react-redux';
+import PropTypes from "prop-types";
 
 
 class LogControl extends React.Component {
@@ -19,7 +20,7 @@ class LogControl extends React.Component {
   }
 
   handleChangingSelectedLog = (id) => {
-    const selectedLog = this.state.masterLogList.filter(log => log.id === id)[0];
+    const selectedLog = this.props.masterLogList[id];
     this.setState({ selectedLog: selectedLog });
   }
 
@@ -64,7 +65,7 @@ class LogControl extends React.Component {
 
   handleEditingLogInList = (logToEdit) => {
     const { dispatch } = this.props;
-    const { id, name, kind, location, level, description } = newLog;
+    const { id, name, kind, location, level, description } = logToEdit;
 
     const action = {
       type: 'ADD_LOG',
@@ -121,7 +122,7 @@ class LogControl extends React.Component {
     } else if (this.state.counter === 0) {
       currentlyVisibleState =
         <LogList
-          logList={this.state.masterLogList}
+          logList={this.props.masterLogList}
           onLogSelection={this.handleChangingSelectedLog}
         />
       buttonText = "Add Log!";
@@ -142,6 +143,18 @@ class LogControl extends React.Component {
   }
 }
 
-LogControl = connect()(LogControl);
+LogControl.propTypes = {
+  masterLogList: PropTypes.object
+};
+
+const mapStateToProps = state => {
+  return {
+    masterLogList: state
+  }
+}
+
+// Note: we are now passing mapStateToProps into the connect() function.
+
+LogControl = connect(mapStateToProps)(LogControl);
 
 export default LogControl;

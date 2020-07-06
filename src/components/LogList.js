@@ -7,8 +7,8 @@ import LogDetail from './LogDetail';
 function LogList(props) {
   return (
     <React.Fragment>
-      {props.logList.map((log) =>
-        <Log
+      {Object.values(props.logList).map((log) => {
+        return <Log
           whenLogClicked={props.onLogSelection}
           name={log.name}
           kind={log.kind}
@@ -17,13 +17,13 @@ function LogList(props) {
           description={log.description}
           id={log.id}
           key={log.id} />
-      )}
+      })}
     </React.Fragment>
   );
 }
 
 LogList.propTypes = {
-  logList: PropTypes.array,
+  logList: PropTypes.object,
   onLogSelection: PropTypes.func
 };
 
