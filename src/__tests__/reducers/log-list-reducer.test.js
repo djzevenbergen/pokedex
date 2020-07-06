@@ -4,68 +4,78 @@ describe('logListReducer', () => {
 
   const currentState = {
     1: {
-      names: 'Ryan & Aimen',
-      location: '4b',
-      issue: 'Redux action is not working correctly.',
+      name: 'Butterfree',
+      kind: 'bug',
+      location: 'Mexico',
+      level: 4,
+      description: 'He cute',
       id: 1
     },
     2: {
-      names: 'Jasmine and Justine',
-      location: '2a',
-      issue: 'Reducer has side effects.',
+      name: 'Pikachu',
+      kind: 'electric',
+      location: 'Silicon Valley',
+      level: 40,
+      description: 'Shocked me before I could catch it',
       id: 2
     }
   }
 
 
   let action;
-  const ticketData = {
-    names: 'Ryan & Aimen',
-    location: '4b',
-    issue: 'Redux action is not working correctly.',
+  const logData = {
+    name: 'Butterfree',
+    kind: 'bug',
+    location: 'Mexico',
+    level: 4,
+    description: 'He cute',
     id: 1
   };
 
 
 
   test('Should return default state if there is no action type passed into the reducer', () => {
-    expect(ticketListReducer({}, { type: null })).toEqual({});
+    expect(logListReducer({}, { type: null })).toEqual({});
   });
 
-  test('Should successfully add new ticket data to masterTicketList', () => {
-    const { names, location, issue, id } = ticketData;
+  test('Should successfully add new log data to masterLogList', () => {
+    const { name, kind, location, level, description, id } = logData;
     action = {
-      type: 'ADD_TICKET',
-      names: names,
+      type: 'ADD_LOG',
+      name: name,
+      kind: kind,
       location: location,
-      issue: issue,
+      level: level,
+      description: description,
       id: id
     };
 
-    expect(ticketListReducer({}, action)).toEqual({
+    expect(logListReducer({}, action)).toEqual({
       [id]: {
-        names: names,
+        name: name,
+        kind: kind,
         location: location,
-        issue: issue,
+        level: level,
+        description: description,
         id: id
       }
     });
   });
 
-  test('Should successfully delete a ticket', () => {
+  test('Should successfully delete a log', () => {
     action = {
-      type: 'DELETE_TICKET',
+      type: 'DELETE_LOG',
       id: 1
     };
-    expect(ticketListReducer(currentState, action)).toEqual({
+    expect(logListReducer(currentState, action)).toEqual({
       2: {
-        names: 'Jasmine and Justine',
-        location: '2a',
-        issue: 'Reducer has side effects.',
+        name: 'Pikachu',
+        kind: 'electric',
+        location: 'Silicon Valley',
+        level: 40,
+        description: 'Shocked me before I could catch it',
         id: 2
       }
     });
   });
-
-
 });

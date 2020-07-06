@@ -20,7 +20,7 @@ Log.propTypes = {
   name: PropTypes.string.isRequired,
   level: PropTypes.number,
   location: PropTypes.string,
-  type: PropTypes.string,
+  kind: PropTypes.string,
   id: PropTypes.string,
   whenLogClicked: PropTypes.func
 };

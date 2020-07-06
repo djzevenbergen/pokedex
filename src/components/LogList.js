@@ -11,7 +11,7 @@ function LogList(props) {
         <Log
           whenLogClicked={props.onLogSelection}
           name={log.name}
-          type={log.type}
+          kind={log.kind}
           location={log.location}
           level={log.level}
           description={log.description}

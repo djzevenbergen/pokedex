@@ -13,7 +13,7 @@ function NewLogForm(props) {
   );
   function handleNewLogFormSubmission(event) {
     event.preventDefault();
-    props.onNewLogCreation({ name: event.target.name.value, location: event.target.location.value, type: event.target.type.value, level: event.target.level.value, description: event.target.description.value, id: v4() });
+    props.onNewLogCreation({ name: event.target.name.value, location: event.target.location.value, kind: event.target.kind.value, level: event.target.level.value, description: event.target.description.value, id: v4() });
   }
 }
 NewLogForm.propTypes = {

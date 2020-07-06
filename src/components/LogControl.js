@@ -3,6 +3,7 @@ import NewLogForm from "./NewLogForm";
 import LogList from "./LogList";
 import LogDetail from "./LogDetail";
 import EditLogForm from './EditLogForm';
+import { connect } from 'react-redux';
 
 
 class LogControl extends React.Component {
@@ -11,7 +12,6 @@ class LogControl extends React.Component {
     super(props);
     this.state = {
       formVisibleOnPage: false,
-      masterLogList: [],
       counter: 0,
       selectedLog: null,
       editing: false
@@ -24,10 +24,21 @@ class LogControl extends React.Component {
   }
 
   handleAddingNewLogToList = (newLog) => {
+    const { dispatch } = this.props;
+    const { id, name, kind, location, level, description } = newLog;
 
-    const newMasterLogList = this.state.masterLogList.concat(newLog);
+    const action = {
+      type: 'ADD_LOG',
+      id: id,
+      name: name,
+      kind: kind,
+      location: location,
+      level: level,
+      description: description,
+    }
+    dispatch(action);
+
     this.setState({
-      masterLogList: newMasterLogList,
       counter: 0
     });
   }
@@ -52,11 +63,21 @@ class LogControl extends React.Component {
   }
 
   handleEditingLogInList = (logToEdit) => {
-    const editedMasterLogList = this.state.masterLogList
-      .filter(log => log.id !== this.state.selectedLog.id)
-      .concat(logToEdit);
+    const { dispatch } = this.props;
+    const { id, name, kind, location, level, description } = newLog;
+
+    const action = {
+      type: 'ADD_LOG',
+      id: id,
+      name: name,
+      kind: kind,
+      location: location,
+      level: level,
+      description: description,
+    }
+
+    dispatch(action);
     this.setState({
-      masterLogList: editedMasterLogList,
       editing: false,
       selectedLog: null
     });
@@ -68,9 +89,15 @@ class LogControl extends React.Component {
   }
 
   handleDeletingLog = (id) => {
-    const newMasterLogList = this.state.masterLogList.filter(log => log.id !== id);
+    const { dispatch } = this.props;
+    const action = {
+      type: 'DELETE_TICKET',
+      id: id
+    }
+
+    dispatch(action);
+
     this.setState({
-      masterLogList: newMasterLogList,
       selectedLog: null
     });
   }
@@ -114,5 +141,7 @@ class LogControl extends React.Component {
     );
   }
 }
+
+LogControl = connect()(LogControl);
 
 export default LogControl;

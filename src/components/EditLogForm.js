@@ -7,7 +7,7 @@ function EditLogForm(props) {
 
   function handleEditLogFormSubmission(event) {
     event.preventDefault();
-    props.onEditLog({ name: event.target.name.value, location: event.target.location.value, type: event.target.type.value, description: event.target.description.value, level: event.target.level.value, id: log.id });
+    props.onEditLog({ name: event.target.name.value, location: event.target.location.value, kind: event.target.kind.value, description: event.target.description.value, level: event.target.level.value, id: log.id });
   }
 
   return (

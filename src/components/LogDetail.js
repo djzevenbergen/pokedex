@@ -7,7 +7,7 @@ function LogDetail(props) {
     <React.Fragment>
       <h1>Details</h1>
       <h3>Name: {log.name}</h3>
-      <p>Type: {log.type}</p>
+      <p>Kind: {log.kind}</p>
       <p>Level: {log.level}</p>
       <p>Location: {log.location}</p>
       <p>Description: {log.description}</p>
